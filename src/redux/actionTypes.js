@@ -1,0 +1,1 @@
+export const SET_SORT_FILTER = 'SET_SORT_FILTER'

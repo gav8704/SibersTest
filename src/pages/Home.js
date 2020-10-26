@@ -1,7 +1,7 @@
 import React from 'react'
 
 import HomeHeader from '../components/HomeHeader'
-import ContactsList from '../components/ContactsList'
+import ContactList from '../components/ContactList'
 
 const Home = () => {
 
@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <HomeHeader />
       <main>
-        <ContactsList />
+        <ContactList />
       </main>
     </>
   )

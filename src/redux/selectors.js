@@ -1,0 +1,1 @@
+export const getSortFilter = state => state.sortFilter

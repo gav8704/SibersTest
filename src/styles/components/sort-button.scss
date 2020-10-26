@@ -5,8 +5,10 @@
 \*------------------------------------*/
 
 .btn-sort {
+  min-width: 150px;
   padding: 7px 15px;
   font-size: 16px;
+  text-transform: capitalize;
   border-radius: 5px;
   cursor: pointer;
   outline: none;
