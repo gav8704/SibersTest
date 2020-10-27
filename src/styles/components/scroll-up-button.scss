@@ -16,7 +16,7 @@
   width:  40px;
   height: 40px;
   border-radius: 10px;
-  background-color: #3366ff;
+  background-color: $blue;
   border:  none;
   outline: none;
   cursor: pointer;
@@ -26,6 +26,4 @@
   &:hover {
     opacity: 0.7;
   }
-
-
 }

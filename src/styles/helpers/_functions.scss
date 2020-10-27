@@ -1,0 +1,5 @@
+@function fluidSizeVw($val, $windowWidth) {
+  $result: $val * 100 / $windowWidth;
+
+  @return $result + vw;
+}
