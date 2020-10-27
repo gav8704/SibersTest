@@ -5,7 +5,6 @@
 \*------------------------------------*/
 
 .btn-sort {
-  min-width: 150px;
   padding: 7px 15px;
   font-size: 16px;
   text-transform: capitalize;
@@ -14,6 +13,8 @@
   outline: none;
 
   @include breakpoint (sm) {
+    min-width: 150px;
+    
     svg {
       margin-right: 10px;
     }

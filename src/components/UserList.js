@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactList = () => {
+const UserList = () => {
 
   return (
     <section>
@@ -9,4 +9,4 @@ const ContactList = () => {
   )
 }
 
-export default ContactList
+export default UserList
