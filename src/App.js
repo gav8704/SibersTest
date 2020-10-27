@@ -14,6 +14,7 @@ import {
 } from './helpers/localStorage'
 
 import Home from './pages/Home'
+import UserInfo from './pages/UserInfo'
 
 import './styles/index.scss'
 
@@ -25,7 +26,7 @@ const App = () => {
 
     if (localStorageHasUserList) {
       const userList = localStorageGet('userList')
-      setUserList(userList)
+      dispatch(setUserList(userList))
     } else {
       fetchUserList()
     }
@@ -46,6 +47,9 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/user/:id">
+          <UserInfo />
         </Route>
       </Switch>
     </div>

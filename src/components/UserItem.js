@@ -1,18 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { object } from 'prop-types'
+import lazySizes from 'lazysizes'
 
 const UserItem = ({ user }) => {
 
   return (
     <li className="user-list__item">
       <Link 
-        to={ `/id${ user.id }` }
+        to={ `/user/id${ user.id }` }
         className="user__link"
       >
         <img 
-          src={ user.avatar } 
-          className="user__avatar"
+          data-src={ user.avatar } 
+          className="user__avatar circle lazyload"
           alt="avatar"
         />
 

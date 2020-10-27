@@ -1,8 +1,8 @@
 
 /**
  * Check if key exists in local storage
- * @param  string key
- * @return boolean
+ * @param  {string} key
+ * @returns {boolean}
  */
 export const localStorageHas = key => {
   const item = localStorage.getItem(key)
@@ -12,8 +12,8 @@ export const localStorageHas = key => {
 
 /**
  * Retrive an object from local storage.
- * @param  string key
- * @return mixed
+ * @param {string} key
+ * @returns {*}
  */
 export const localStorageGet = key => {
   const item = localStorage.getItem(key)
@@ -29,8 +29,8 @@ export const localStorageGet = key => {
 
 /**
  * Save some value to local storage.
- * @param string key    
- * @param string value
+ * @param {string} key    
+ * @param {*} value
  */
 export const localStorageSave = (key, value) => {
   if ( typeof(value) === 'object' ) {
@@ -42,7 +42,7 @@ export const localStorageSave = (key, value) => {
 
 /**
  * Remove element from local storage.
- * @param string key 
+ * @param {string} key 
  */
 export const localStorageRemove = key => {
   localStorage.removeItem(key)

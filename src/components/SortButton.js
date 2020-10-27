@@ -3,16 +3,15 @@ import {
   useSelector,
   useDispatch
 } from 'react-redux'
-
-import { useWindowSize } from '../custom-hooks'
-import { setSortFilter } from '../redux/actions'
-import { getSortFilter } from '../redux/selectors'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faArrowAltCircleUp, 
   faArrowAltCircleDown 
 } from '@fortawesome/free-solid-svg-icons'
+
+import { useWindowSize } from '../custom-hooks'
+import { setSortFilter } from '../redux/actions'
+import { getSortFilter } from '../redux/selectors'
 
 import '../styles/components/sort-button.scss'
 
