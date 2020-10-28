@@ -11,7 +11,6 @@ const Home = () => {
     <>
       <Helmet>
         <title>Contacts</title>
-        {/* <script src="../assets/scripts/lazysizes.min.js" async /> */}
       </Helmet>
 
       <HomeHeader />

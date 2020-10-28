@@ -2,11 +2,15 @@ import React, {
   useEffect,
   useState
 } from 'react'
-import { useSelector } from 'react-redux'
+import { 
+  useSelector,
+  useDispatch
+} from 'react-redux'
 import { 
   useParams, 
   Link 
 } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faUser, 
@@ -15,10 +19,14 @@ import {
   faGlobe,
   faEnvelope,
   faLink,
-  faLongArrowAltLeft
+  faLongArrowAltLeft,
+  faUserEdit,
+  faSave
 } from '@fortawesome/free-solid-svg-icons'
+import { useAlert } from 'react-alert'
 
 import { getUserList } from '../redux/selectors'
+import { updateUser } from '../redux/actions'
 
 const formItems = [
   'fullname',
@@ -30,10 +38,13 @@ const formItems = [
 ]
 
 const UserInfo = () => {
+  const alert = useAlert()
+  const dispatch = useDispatch()
   const { id: paramId } = useParams()
   const userList = useSelector(getUserList)
   const [user, setUser] = useState(null)
   const [isEdited, setIsEdited] = useState(false)
+  const [hasEmptyField, setHasEmptyField] = useState(false)
   const [form, setForm] = useState({
     fullname: '',
     address: '',
@@ -43,10 +54,18 @@ const UserInfo = () => {
     website: ''
   })
 
+  /**
+   * If there are empty fields then disable edit button 
+   */
   useEffect(() => {
-    const id = transformIdToNumber(paramId)
-    const user = getUserById(id)
-    setUser(user)
+    checkEmptyField()
+  }, [form])
+
+  /**
+   * Searching user by param id
+   */
+  useEffect(() => {
+    searchUserById()
   }, [paramId, userList])
 
   useEffect(() => {
@@ -60,8 +79,24 @@ const UserInfo = () => {
     })
   }, [user])
 
-  function getUserById(id) {
-    return userList.find(user => user.id === id)
+  function checkEmptyField() {
+    let hasEmpty = false
+
+    for(let fieldName in form) {
+      if (form[fieldName] === '') {        
+        hasEmpty = true
+        break
+      }
+    }
+
+    hasEmptyField !== hasEmpty && setHasEmptyField(hasEmpty)
+  }
+
+  function searchUserById() {
+    const id = transformIdToNumber(paramId)
+    const user = userList.find(user => user.id === id)
+
+    user && setUser(user)
   }
 
   /**
@@ -84,21 +119,69 @@ const UserInfo = () => {
     })
   }
 
+  /**
+   * Saves data's changes to the store and shows alert
+   */
+  function handleClick() {
+    if (isEdited) {
+      const updatedUser = { 
+        ...user,
+        name: form.fullname,
+        email: form.email,
+        website: form.website,
+        address: {
+          ...user.address,
+          streetC: form.address,
+          city: form.city,
+          state: form.state
+        }
+      }
+
+      dispatch(updateUser(updatedUser))
+
+      alert.show('Data has been changed!', {
+        type: 'success'
+      })
+    }
+
+    setIsEdited(!isEdited)
+  }
+
   return (
     <>
-      <h1 className="main-caption">User's info</h1>
+      <Helmet>
+        <title>User's info</title>
+      </Helmet>
+
+      <h1 className="main-caption">
+        { 
+          user ? 
+            `User's info` :
+            `User not found`
+        }
+      </h1>
 
       {
         user && (
           <>
-            <img 
-              src={ user.avatar } 
-              className="avatar circle"
-              width="100"
-              height="100"
-              alt="avatar"
-            />
-            
+            <div className="flex-container">
+              <img 
+                src={ user.avatar } 
+                className="avatar circle"
+                width="100"
+                height="100"
+                alt="avatar"
+              />
+              <button
+                onClick={ handleClick }
+                disabled={ hasEmptyField }
+                className={ `btn-edit ${ isEdited ? 'btn-edit--blue' : '' }` }
+              >
+                <FontAwesomeIcon icon={ isEdited ? faSave : faUserEdit } />
+                { isEdited ? 'Save' : 'Edit' }
+              </button>
+            </div>
+
             <div className="user-form">
               {
                 formItems.map((item, index) => {
@@ -138,6 +221,7 @@ const UserInfo = () => {
                       </div>
 
                       <input
+                        type="text"
                         name={ item }
                         value={ form[item] }
                         onChange={ handleChange }

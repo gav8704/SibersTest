@@ -1,3 +1,4 @@
 export const SET_SORT_FILTER = 'SET_SORT_FILTER'
 export const SET_SEARCH_INPUT = 'SET_SEARCH_INPUT'
 export const SET_USER_LIST = 'SET_USER_LIST'
+export const UPDATE_USER = 'UPDATE_USER'
