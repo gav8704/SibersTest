@@ -9,7 +9,7 @@ const UserList = () => {
   const userList = useSelector(getFilteredUserList)
 
   return (
-    <section className="contact-container">
+    <section className="user-container">
       <ul className="user-list">
         {
           userList.map(user => <UserItem key={ user.id } user={ user } />)

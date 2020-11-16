@@ -7,7 +7,6 @@ import {
 import { setSearchInput } from '../redux/actions'
 import { getSearchInput } from '../redux/selectors'
 
-
 import '../styles/components/search-input.scss'
 
 const SearchInput = () => {
